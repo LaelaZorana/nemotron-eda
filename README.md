@@ -22,7 +22,7 @@ A few things you will see reflected here that carry across all my projects:
 
 - Evidence over assumption. I try to make every claim something I measured, not something I guessed. When I am unsure, I say so.
 - Understand the scoring before the modeling. How a benchmark grades you usually tells you where the points actually are.
-- Keep the easy categories easy. A lot of "improvements" quietly break the things that already worked, so I check.
+- Keep the easy categories easy. A lot of "improvements" break things that already worked without anyone noticing, so I check.
 
 ## Notes
 
