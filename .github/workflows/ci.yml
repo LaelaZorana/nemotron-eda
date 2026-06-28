@@ -1,0 +1,27 @@
+name: CI
+
+# This is an exploratory-data-analysis repo (Jupyter notebooks + a small data
+# formatting script). CI validates that every notebook is well-formed nbformat
+# and that the helper scripts parse, so a corrupted notebook or a syntax slip is
+# caught without executing the (data-dependent) analysis.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: pip install nbformat
+      - name: Validate notebooks
+        run: |
+          python -c "import glob, nbformat; nbs = sorted(glob.glob('**/*.ipynb', recursive=True)); [nbformat.validate(nbformat.read(nb, as_version=4)) for nb in nbs]; print(f'{len(nbs)} notebook(s) valid')"
+      - name: Compile-check scripts
+        run: python -m compileall -q scripts
