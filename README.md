@@ -12,9 +12,16 @@ This repo is that first pass: a from-scratch look at the puzzle dataset, the six
 
 ## What is inside
 
-- `notebooks/eda.ipynb` is the high-level walkthrough. I go through the dataset the way I would explain it to a teammate: what the puzzles are, how the prompts and answers are formatted, and what I would look at next.
-- `notebooks/eda_detailed.ipynb` is the deeper pass, category by category. This is where I break down each puzzle type, look at the answer formats, and form a view on which families reward careful data work and which do not.
+- `notebooks/eda.ipynb` is the high-level walkthrough. It buckets prompts into puzzle families, then charts family counts, answer formats, answer lengths and prompt lengths.
+- `notebooks/eda_detailed.ipynb` is the same idea in plain standard-library Python, category by category, plus a look at the test file.
 - `scripts/format_data.py` is a small utility that turns the raw CSV puzzles into a clean prompt and answer JSONL, which is the format I use for fine-tuning downstream.
+- `scripts/make_synthetic_sample.py` generates a tiny synthetic dataset with the same file structure, using a fixed seed. Not one row of it comes from the competition data.
+
+## Running the notebooks
+
+The competition data cannot be redistributed here, so the notebooks resolve their input in three steps. They first check the `NEMOTRON_DATA_DIR` environment variable for a local copy, then the `/kaggle/input` mount when running on Kaggle, and otherwise they generate the synthetic sample and run on that.
+
+The outputs committed in this repo come from the synthetic fallback, and every chart and table is labeled synthetic sample. So what you see here is the structure of the analysis proven end to end on invented rows. The real distributions and counts only appear when you run the notebooks with the actual dataset from the competition page.
 
 ## How I work
 
